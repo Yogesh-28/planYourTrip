@@ -1,0 +1,55 @@
+.logo{
+  margin: 100px 100px;
+  max-width: 40%;
+}
+
+div.logo img{
+	margin:20px 110px;
+}
+
+div.logo h1{
+	font-size: 60px;
+	text-align: center;
+}
+
+div.logo span{
+	display: block;
+	font-size: 40px;
+	text-align: center;
+}
+
+.line{
+	border-left: 2px solid black;
+	height: 600px;
+  	position: absolute;
+  	left: 50%;
+  	top:50px;
+}
+
+form.login{
+	border:2px solid #f2f2f2;
+	padding: 20px;
+  	border-radius: 5px;
+	position: absolute;
+	left:60%;
+	top:150px;
+	height:400px;
+  	width: 25%;
+}
+
+form.login input{
+	width: 100%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	display: inline-block;
+  	border: 1px solid #ccc;
+  	border-radius: 4px;
+  	box-sizing: border-box;
+  	background-color: rgb(234,230,234);
+}
+
+input[type=button]:hover{
+	cursor: pointer;
+	background-color: black;
+	color:white;
+}
