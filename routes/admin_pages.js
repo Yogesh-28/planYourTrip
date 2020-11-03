@@ -72,7 +72,7 @@ router.post('/add-page', function(req,res) {
 
 //get edit page
 router.get('/edit-page/:slug', function(req,res) {
-    Page.findOne({slug: req.params.slug}, function (err, Page) {
+    Page.findOne({slug: req.params.slug}, function (err, page) {
         if (err) return console.log(err);
 
         res.render('admin/edit_page.ejs', {
@@ -85,7 +85,7 @@ router.get('/edit-page/:slug', function(req,res) {
 });
 
 //post edit page
-router.post('/edit-page/:id', function (req, res) {
+router.post('/edit-page/:slug', function (req, res) {
 
     req.checkBody('title', 'Title must have a value.').notEmpty();
     req.checkBody('content', 'Content must have a value.').notEmpty();
@@ -95,7 +95,6 @@ router.post('/edit-page/:id', function (req, res) {
     if (slug == "")
         slug = title.replace(/\s+/g, '-').toLowerCase();
     var content = req.body.content;
-    var id = req.params.id;
 
     var errors = req.validationErrors();
 
@@ -108,7 +107,7 @@ router.post('/edit-page/:id', function (req, res) {
             id: id
         });
     } else {
-        Page.findOne({slug: slug, _id: {'$ne': id}}, function (err, page) {
+        Page.findOne({slug: slug, function (err, page) {
             if (page) {
                 req.flash('danger', 'Page slug exists, choose another.');
                 res.render('admin/edit_page', {
@@ -154,8 +153,8 @@ router.post('/edit-page/:id', function (req, res) {
 });
 
 //GET delete page
-router.get('/delete-page/:id', isAdmin, function (req, res) {
-   Page.findByIdAndRemove(req.params.id, function (err) {
+router.get('/delete-page/:slug', function (req, res) {
+   Page.findByIdAndRemove(req.params.slug, function (err) {
        if (err)
            return console.log(err);
 
