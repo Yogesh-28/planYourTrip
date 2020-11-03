@@ -153,6 +153,25 @@ router.post('/edit-page/:id', function (req, res) {
 
 });
 
+//GET delete page
+router.get('/delete-page/:id', isAdmin, function (req, res) {
+   Page.findByIdAndRemove(req.params.id, function (err) {
+       if (err)
+           return console.log(err);
+
+       Page.find({}).sort({sorting: 1}).exec(function (err, pages) {
+           if (err) {
+               console.log(err);
+           } else {
+               req.app.locals.pages = pages;
+           }
+       });
+
+       req.flash('success', 'Page deleted!');
+       res.redirect('/admin/pages/');
+   });
+});
+
 
 // Exports
 module.exports = router;
